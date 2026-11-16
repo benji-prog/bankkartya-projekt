@@ -8,6 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('/ellenorzes', [KartyaVezerlo::class, 'ellenoriz']);
+Route::post('/ellenorzes', [KartyaVezerlo::class, 'ellenorzes']);
 Route::get('/elozmenyek', [KartyaVezerlo::class, 'elozmenyek']);
-Route::get('/statisztika', [KartyaVezerlo::class, 'statisztika']); // E3
+Route::get('/statisztika', [KartyaVezerlo::class, 'statisztika']);
