@@ -4,7 +4,6 @@ import KartyatarsasagJelzo from './components/KartyatarsasagJelzo.vue'
 import KartyaszamBevitel from './components/KartyaszamBevitel.vue'
 import EredmenyDoboz from './components/EredmenyDoboz.vue'
 import ElozmenyekTablazat from './components/ElozmenyekTablazat.vue'
-import StatisztikaPanel from './components/StatisztikaPanel.vue'
 import { szerver } from './segedek/szerver.js'
 import {
   kartyatarsasagMeghataroz,
@@ -137,6 +136,5 @@ onMounted(() => {
     <p v-if="hibauzenet" class="hiba" role="alert">{{ hibauzenet }}</p>
     <EredmenyDoboz :eredmeny="eredmeny" />
     <ElozmenyekTablazat :elozmenyek="elozmenyek" />
-    <StatisztikaPanel :statisztika="statisztika" />
   </main>
 </template>
