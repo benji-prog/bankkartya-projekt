@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 
 class KartyaVezerlo extends Controller
 {
-    // B3. Egy kártyaszám ellenőrzése és mentése
-    public function ellenoriz(Request $request)
+    public function ellenorzes(Request $request)
     {
         $validated = $request->validate([
             'kartyaszam' => 'required|string|digits:16'
@@ -29,7 +28,6 @@ class KartyaVezerlo extends Controller
         $luhnOsszeg = $this->luhnOsszeg($szam);
         $elvartJegy = (10 - $this->luhnOsszeg(substr($szam, 0, 15) . '0') % 10) % 10;
 
-        // E2: a teljes kártyaszámot nem tároljuk, mentés előtt maszkolunk (első 6 + 6 csillag + utolsó 4)
         $maszkolt = substr($szam, 0, 6) . str_repeat('*', 6) . substr($szam, -4);
 
         $ellenorzes = KartyaEllenorzes::create([
@@ -43,14 +41,12 @@ class KartyaVezerlo extends Controller
         return response()->json($ellenorzes, 201);
     }
 
-    // B4. A legutóbbi 10 ellenőrzés, a legújabb elöl
     public function elozmenyek()
     {
         $elozmenyek = KartyaEllenorzes::latest('id')->take(10)->get();
         return response()->json($elozmenyek, 200);
     }
 
-    // E3. Statisztika
     public function statisztika()
     {
         $kartyatarsasagok = KartyaEllenorzes::selectRaw('kartyatarsasag, count(*) as darab')
